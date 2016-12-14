@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require_relative '../lib/flappy/cli'
+
+begin
+  OS.set_locale
+  FIR::CLI.start ARGV
+rescue => e
+  raise e if $DEBUG
+  STDERR.puts e.message
+  STDERR.puts e.backtrace.join("\n")
+  exit 1
+end
