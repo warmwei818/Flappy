@@ -5,7 +5,7 @@ require_relative '../lib/flappy/cli'
 
 begin
   OS.set_locale
-  FIR::CLI.start ARGV
+  Flappy::CLI.start ARGV
 rescue => e
   raise e if $DEBUG
   STDERR.puts e.message

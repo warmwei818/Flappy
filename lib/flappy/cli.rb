@@ -40,6 +40,33 @@ module Flappy
       Flappy.build_apk(*args, options)
     end
 
+    desc 'help', 'Describe available commands or one specific command (aliases: `h`).'
+    map Thor::HELP_MAPPINGS => :help
+    def help(command = nil, subcommand = false)
+      super
+    end
+
+    no_commands do
+      def invoke_command(command, *args)
+        # logfile = options[:logfile].blank? ? STDOUT : options[:logfile]
+        # logfile = '/dev/null' if options[:quiet]
+        #
+        # FIR.logger       = Logger.new(logfile)
+        # FIR.logger.level = options[:verbose] ? Logger::INFO : Logger::ERROR
+        super
+      end
+    end
+
+    private
+
+    def prepare(task)
+      if options.help?
+        help(task.to_s)
+        fail SystemExit
+      end
+      $DEBUG = true if ENV['DEBUG']
+    end
+
 
 
 
